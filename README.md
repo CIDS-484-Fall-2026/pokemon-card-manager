@@ -69,3 +69,9 @@ The next stage of development will focus on:
 5. Beginning development of the web interface
 
 The project will be developed incrementally so that the core collection-management functionality is completed before additional features are considered.
+
+## Milestone 1 Video
+
+A video overview and walkthrough of the Milestone 1 prototype can be viewed here:
+
+[Milestone 1 Project Overview](<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/2370711/embedPlaykitJs/uiconf_id/54949472?iframeembed=true&amp;entry_id=1_knnwlugx&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_a0xgbq82%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 342px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Milestone1"></iframe>)
