@@ -18,7 +18,11 @@ public class PokemonCardService {
     public String searchCards(String name) {
 
         return restClient.get()
-                .uri("/cards?q=name:{name}&pageSize=5", name)
+                .uri(uriBuilder -> uriBuilder
+                        .path("/cards")
+                        .queryParam("q", "name:" + name)
+                        .queryParam("pageSize", 5)
+                        .build())
                 .retrieve()
                 .body(String.class);
     }
