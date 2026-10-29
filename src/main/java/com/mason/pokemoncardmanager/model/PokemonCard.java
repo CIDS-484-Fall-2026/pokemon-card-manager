@@ -1,4 +1,3 @@
-
 package com.mason.pokemoncardmanager.model;
 
 import jakarta.persistence.Entity;

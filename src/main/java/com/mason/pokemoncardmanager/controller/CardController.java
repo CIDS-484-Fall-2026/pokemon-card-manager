@@ -1,4 +1,3 @@
-
 package com.mason.pokemoncardmanager.controller;
 
 import com.mason.pokemoncardmanager.model.PokemonCard;

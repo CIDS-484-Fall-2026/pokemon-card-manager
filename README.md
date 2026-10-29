@@ -133,4 +133,4 @@ The next stage of development will focus on:
 
 ## Milestone 2 Video
 
-The Milestone 2 demonstration video will be linked here after recording and uploading.
+[Watch the Milestone 2 Demonstration](https://cdnapisec.kaltura.com/p/2370711/embedPlaykitJs/uiconf_id/54949472?iframeembed=true&entry_id=1_9fukl10w)
