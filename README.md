@@ -2,76 +2,135 @@
 
 ## Project Overview
 
-The Pokémon Card Collection Manager is a web-based application designed to help Pokémon card collectors organize and manage their collections digitally. The application will allow users to search for real Pokémon cards and eventually add cards to their own collection while keeping track of information such as quantity and condition.
+The Pokémon Card Collection Manager is a web-based application designed to help Pokémon card collectors organize and 
+manage their collections digitally.
 
-Card information will be retrieved from the Pokémon TCG API rather than requiring all card information to be entered manually.
+The application currently provides a Java Spring Boot backend that allows users to search for real Pokémon cards using 
+the Pokémon TCG API and manage a personal collection stored in an Oracle database.
 
-## Planned Features
+Future development will include a web interface and additional collection-management features, such as tracking card 
+quantity and condition.
 
-The main features planned for the project include:
+## Features
 
-- Search for Pokémon cards using the Pokémon TCG API
-- View information about individual cards
-- Add cards to a personal collection
-- Track the quantity and condition of collected cards
-- Store collection information in a relational database
-- Search and organize cards within the collection
-- Provide a simple web interface for managing the collection
+### Completed Features (Milestones 1 and 2)
 
-Additional features may be added later depending on project progress and available time.
+- Search for real Pokémon cards using the Pokémon TCG API
+- Retrieve card information through REST endpoints
+- Add Pokémon cards to a personal collection
+- View all saved cards or retrieve an individual card by ID
+- Update information for saved cards
+- Delete cards from the collection
+- Store collection data persistently in an Oracle relational database
+- Return card information in JSON format
+
+### Planned Features
+
+- Develop a user-friendly web interface
+- Display saved cards in a binder-style collection view
+- Track card quantity and condition
+- Improve searching and organizing cards within the collection
+- Further integrate external Pokémon TCG API information with saved collection data
+
+Additional features may be added depending on project progress and available time.
 
 ## Technology Stack
 
 - **Java 21** - Primary programming language
 - **Spring Boot** - Backend application framework
 - **Spring Web** - REST API development
+- **Spring Data JPA / Hibernate** - Database persistence and entity management
+- **Oracle Database** - Relational database for stored Pokémon cards
 - **REST/JSON** - Communication between the application and APIs
 - **Pokémon TCG API** - External source for Pokémon card data
 - **Gradle** - Build and dependency management
-- **Oracle Database** - Planned relational database for collection data
 - **HTML/CSS/JavaScript** - Planned frontend technologies
 - **Git/GitHub** - Version control and project repository
 
 ## Current Progress
 
-For Milestone 1, the initial backend structure and API prototype have been created.
+### Milestone 1
 
-Current progress includes:
+For Milestone 1, the initial backend structure and API prototype were created.
+
+Completed work included:
 
 - Created the Spring Boot project
-- Created a basic `PokemonCard` model
+- Created the initial `PokemonCard` model
 - Created a REST controller with test endpoints
 - Created a service for communicating with the Pokémon TCG API
 - Successfully returned JSON data through local REST endpoints
-- Successfully search for real Pokémon cards using the external Pokémon TCG API
+- Successfully searched for real Pokémon cards using the external Pokémon TCG API
 - Set up the GitHub repository and version control
 
-The current project uses some hard-coded card data for testing while the database portion of the application has not yet been implemented.
+### Milestone 2
+
+For Milestone 2, the project was expanded into a working database-backed collection management system.
+
+Completed work includes:
+
+- Installed and configured Oracle Database
+- Connected the Spring Boot application to Oracle using Spring Data JPA
+- Created a database table for storing Pokémon card information
+- Implemented a repository for database operations
+- Updated the `PokemonCard` model to support database persistence
+- Implemented REST endpoints for creating, reading, updating, and deleting saved cards
+- Tested API requests using Windows PowerShell
+- Verified that saved card information remains in the database after restarting the application
+- Confirmed that adding, editing, and deleting cards updates the stored collection
+
+The backend now allows users to add, view, edit, and delete Pokémon cards stored in the Oracle database. The frontend 
+interface has not yet been implemented, so collection management is currently performed through REST API requests.
+
+## REST API Endpoints
+
+The application runs locally at `http://localhost:8080`.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/cards` | Retrieve all saved cards |
+| GET | `/api/cards/{id}` | Retrieve a saved card by ID |
+| GET | `/api/cards/search?name=pikachu` | Search the external Pokémon TCG API |
+| POST | `/api/cards` | Add a new card to the collection |
+| PUT | `/api/cards/{id}` | Update an existing saved card |
+| DELETE | `/api/cards/{id}` | Delete a saved card |
+
+POST and PUT requests accept Pokémon card information in JSON format.
+
+Example:
+
+```json
+{
+  "name": "Pikachu",
+  "setName": "Base Set",
+  "cardNumber": "58/102",
+  "rarity": "Common"
+}
+```
 
 ## Project Structure
 
-The backend currently follows a basic layered structure:
+The backend follows a layered structure:
 
-- **Model** - Represents Pokémon card data
+- **Model** - Represents Pokémon card data and maps it to the database
 - **Controller** - Handles HTTP requests and REST endpoints
 - **Service** - Handles communication with the external Pokémon TCG API
-
-As development continues, database/repository components and the frontend will be added.
+- **Repository** - Provides database access using Spring Data JPA
 
 ## Next Steps
 
 The next stage of development will focus on:
 
-1. Designing the database structure for stored card collections
-2. Connecting the Spring Boot application to the database
-3. Storing and retrieving collection data
-4. Further integrating Pokémon TCG API data with the application
-5. Beginning development of the web interface
-
-The project will be developed incrementally so that the core collection-management functionality is completed before additional features are considered.
+1. Creating a frontend interface for interacting with the collection
+2. Displaying saved Pokémon cards in a binder-style view
+3. Improving the connection between external Pokémon TCG API search results and saved collection entries
+4. Adding quantity and condition tracking
+5. Improving the overall usability and presentation of the application
 
 ## Milestone 1 Video
 
-A video overview and walkthrough of the Milestone 1 prototype can be viewed here:
+[Watch the Milestone 1 Project Overview](https://cdnapisec.kaltura.com/p/2370711/embedPlaykitJs/uiconf_id/54949472?iframeembed=true&entry_id=1_knnwlugx)
 
-[Milestone 1 Project Overview](<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/2370711/embedPlaykitJs/uiconf_id/54949472?iframeembed=true&amp;entry_id=1_knnwlugx&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_a0xgbq82%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 342px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Milestone1"></iframe>)
+## Milestone 2 Video
+
+The Milestone 2 demonstration video will be linked here after recording and uploading.

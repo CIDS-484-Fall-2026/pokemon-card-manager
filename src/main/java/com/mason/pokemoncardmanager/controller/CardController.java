@@ -7,6 +7,7 @@ import com.mason.pokemoncardmanager.service.PokemonCardService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -49,6 +50,30 @@ public class CardController {
     @ResponseStatus(HttpStatus.CREATED)
     public PokemonCard saveCard(@RequestBody PokemonCard card) {
         card.setId(null);
+        return pokemonCardRepository.save(card);
+    }
+
+    // Deletes a saved Pokemon card from the Oracle database
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCard(@PathVariable Long id) {
+        pokemonCardRepository.deleteById(id);
+    }
+
+    // Updates an existing Pokemon card in the Oracle database
+    @PutMapping("/{id}")
+    public PokemonCard updateCard(@PathVariable Long id,
+                                  @RequestBody PokemonCard updatedCard) {
+
+        PokemonCard card = pokemonCardRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Card not found"));
+
+        card.setName(updatedCard.getName());
+        card.setSetName(updatedCard.getSetName());
+        card.setCardNumber(updatedCard.getCardNumber());
+        card.setRarity(updatedCard.getRarity());
+
         return pokemonCardRepository.save(card);
     }
 }
