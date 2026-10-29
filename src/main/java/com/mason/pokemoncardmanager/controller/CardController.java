@@ -1,12 +1,12 @@
+
 package com.mason.pokemoncardmanager.controller;
 
 import com.mason.pokemoncardmanager.model.PokemonCard;
+import com.mason.pokemoncardmanager.repository.PokemonCardRepository;
 import com.mason.pokemoncardmanager.service.PokemonCardService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,79 +15,40 @@ import java.util.List;
 public class CardController {
 
     private final PokemonCardService pokemonCardService;
+    private final PokemonCardRepository pokemonCardRepository;
 
-    public CardController(PokemonCardService pokemonCardService) {
+    public CardController(PokemonCardService pokemonCardService,
+                          PokemonCardRepository pokemonCardRepository) {
         this.pokemonCardService = pokemonCardService;
+        this.pokemonCardRepository = pokemonCardRepository;
     }
 
-    // Returns all cards
+    // Returns all cards saved in the Oracle database
     @GetMapping
     public List<PokemonCard> getCards() {
-        return List.of(
-                new PokemonCard(
-                        1L,
-                        "Charizard",
-                        "Base Set",
-                        "4/102",
-                        "Rare Holo"
-                ),
-                new PokemonCard(
-                        2L,
-                        "Pikachu",
-                        "Base Set",
-                        "58/102",
-                        "Common"
-                ),
-                new PokemonCard(
-                        3L,
-                        "Blastoise",
-                        "Base Set",
-                        "2/102",
-                        "Rare Holo"
-                )
-        );
+        return pokemonCardRepository.findAll();
     }
 
-    // Returns one card based on its ID
+    // Returns one saved card based on its database ID
     @GetMapping("/{id}")
     public PokemonCard getCardById(@PathVariable Long id) {
-
-        if (id == 1) {
-            return new PokemonCard(
-                    1L,
-                    "Charizard",
-                    "Base Set",
-                    "4/102",
-                    "Rare Holo"
-            );
-        }
-
-        if (id == 2) {
-            return new PokemonCard(
-                    2L,
-                    "Pikachu",
-                    "Base Set",
-                    "58/102",
-                    "Common"
-            );
-        }
-
-        if (id == 3) {
-            return new PokemonCard(
-                    3L,
-                    "Blastoise",
-                    "Base Set",
-                    "2/102",
-                    "Rare Holo"
-            );
-        }
-
-        return null;
+        return pokemonCardRepository.findById(id).orElse(null);
     }
 
     // Searches for real cards using the Pokemon TCG API
     @GetMapping("/search")
-    public String searchCards(@RequestParam String name) {
-        return pokemonCardService.searchCards(name);
+    public String searchCards(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String set) {
+
+        return pokemonCardService.searchCards(name, set);
+    }
+
+    // Saves a Pokemon card to the Oracle database
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public PokemonCard saveCard(@RequestBody PokemonCard card) {
+        card.setId(null);
+        return pokemonCardRepository.save(card);
     }
 }
