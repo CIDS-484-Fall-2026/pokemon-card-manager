@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -37,6 +36,13 @@
             border: 1px solid #3c4652;
         }
 
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
         .card h2 {
             margin-top: 0;
             color: #f5d76e;
@@ -62,12 +68,20 @@
     <p>Your collection is currently empty.</p>
 </div>
 
+<!-- Display saved cards passed from the Spring Boot controller -->
 <div class="collection">
     <div class="card" th:each="card : ${cards}">
+
+        <!-- Only display artwork when an image URL is available -->
+        <img th:if="${card.imageUrl != null}"
+             th:src="${card.imageUrl}"
+             th:alt="${card.name + ' card artwork'}">
+
         <h2 th:text="${card.name}">Pokémon Name</h2>
         <p>Set: <span th:text="${card.setName}">Set Name</span></p>
         <p>Number: <span th:text="${card.cardNumber}">Card Number</span></p>
         <p>Rarity: <span th:text="${card.rarity}">Rarity</span></p>
+
     </div>
 </div>
 

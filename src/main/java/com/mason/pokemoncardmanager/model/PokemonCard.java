@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 
 @Entity
 public class PokemonCard {
@@ -16,6 +17,10 @@ public class PokemonCard {
     private String setName;
     private String cardNumber;
     private String rarity;
+
+    // Stores the URL of the card's artwork.
+    @Column(length = 1000)
+    private String imageUrl;
 
     public PokemonCard() {
     }
@@ -67,5 +72,15 @@ public class PokemonCard {
 
     public void setRarity(String rarity) {
         this.rarity = rarity;
+    }
+
+    // Returns the URL of the card's artwork.
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    // Updates the URL of the card's artwork.
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
