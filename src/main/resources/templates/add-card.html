@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Pokémon Card</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+
+<h1>Add Pokémon Card</h1>
+<p class="subtitle">Add a new card to your collection</p>
+
+<div class="form-container">
+
+    <!-- Sends the entered card information to Spring Boot -->
+    <form th:action="@{/collection/add}" method="post">
+
+        <label for="name">Pokémon Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="setName">Set Name</label>
+        <input type="text" id="setName" name="setName" required>
+
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" name="cardNumber" required>
+
+        <label for="rarity">Rarity</label>
+        <input type="text" id="rarity" name="rarity" required>
+
+        <label for="imageUrl">Image URL (optional)</label>
+        <input type="url" id="imageUrl" name="imageUrl">
+
+        <button type="submit">Add Card</button>
+
+    </form>
+
+    <p><a th:href="@{/collection}">Back to Collection</a></p>
+
+</div>
+
+</body>
+</html>
